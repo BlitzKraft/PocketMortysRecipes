@@ -1,0 +1,32 @@
+Goal				Items
+------------------------------------------------------------------------------------------------------------
+MortyManipulatorChip		SuperchargedBattery		CircuitBoard		TinCan
+Serum				Battery				Fleeb
+GreatSerum			Battery				PurifiedFleeb
+SensationalSerum		SuperchargedBattery		Serum
+PureSerum			SuperchargedBattery		GreatSerum
+PlutonicRock			Battery				BacteriaCell
+PurePlutonicRock		Battery				MutantBacteriaCell
+Halzinger			Battery				Fleeb			BacteriaCell
+PureHalzinger			Battery				PurifiedFleeb		MutantBacteriaCell
+LevelUpMegaSeed			AttackMegaSeed			DefenseMegaSeed		SpeedMegaSeed
+Battery				TinCan				Cable			Fleeb
+SuperchargedBattery		Battery				TurbulentJuiceTube
+MicroverseBattery		SuperchargedBattery		Motherboard		DarkMatterBall
+PurifiedFleeb			Fleeb				TurbulentJuiceTube
+MutantBacteriaCell		BacteriaCell			TurbulentJuiceTube
+DarkEnergyBall			Fleeb				BacteriaCell
+DarkMatterBall			DarkEnergyBall			TurbulentJuiceTube
+Motherboard			Battery				Circuit	Cable
+DogCollar			Cable				TinCan
+LovePotion			Purified			Fleeb			MutantBacteriaCell
+Robot				SuperchargedBattery		Motherboard
+ButterRobot			Robot				TinCan
+GwendolynDoll			Robot				LovePotion
+TimeCrystal			PurifiedFleeb			DarkEnergyBall
+TimeStabilisingCollar		TimeCrystal			DogCollar
+InterdimensionalCblBox		SuperchargedBattery		Motherboard		TimeCrystal
+NeutrinoBomb			SuperchargedBattery		Motherboard		DarkEnergyBall
+InterdimensionalGoggles		SuperchargedBattery		TimeCrystal		TinCan
+IQEnhancingHelmet		SuperchargedBattery		Motherboard		TurbulentJuiceTube
+RoyVRHeadset			InterdimensionalGoggles		IQEnhancingHelmet
