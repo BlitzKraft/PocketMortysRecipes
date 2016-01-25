@@ -10,7 +10,7 @@ networkx. This is meant as an exercise to use and get familiar with this library
 ###Usage:
 `./recipe <item>`
 
-<item> is what you are trying to craft. Case insensitive. Exact string match. One of the following
+`<item>` is what you are trying to craft. Case insensitive. Exact string match. One of the following
 
  - MortyManipulatorChip
  - Serum
@@ -44,4 +44,5 @@ networkx. This is meant as an exercise to use and get familiar with this library
  - RoyVRHeadset
 
 TODO: fuzzy match or substring match
+
 TODO: recursively print recipe tree
