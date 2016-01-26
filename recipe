@@ -44,8 +44,8 @@ def find_recipe(q):
         if ingred != []:
             sys.stdout.write(prepend)
             print "",ingred
-            print prepend
             prepend = " | " + prepend
+            print prepend
             for i in ingred:
                 find_recipe(i)
             prepend = prepend[:-5] + " |"
