@@ -48,6 +48,13 @@ fuzzywuzzy - For fuzzyfind. If you choose not to use it, read the `recipe` and m
  - RoyVRHeadset
 
 ###Recipes:
-New recipes can be added by simply appending them to `pure.list`.
+New recipes can be added by simply appending them to `pure.list`. Then run `./generate test` (optional) and `./generate write` to save the results. The first item is the goal and the rest are its constituents.  
+Example line from the file would be:  
+`GwendolynDoll			Robot				LovePotion`
+The number of tabs is irrelevant. However, there shouldn't be spaces. The script exclusively tests for tabs and **not** spaces. 
+
+This however does not update the `recipes.list`. This has to be done manually. This file is for human reading and not just parsing. Ergo, it should be hand tuned for readability.
+
+This is done for future proofing. Potentially more recipes could be revealed in later updates of the game. Then, I will be ready.
 
 If an item is not craftable, it outputs nothing. By default battery and supercharged battery are included in basic items, by appending to the list, to reduce output clutter. This behavior can be disabled by commenting out the specific lines. 
