@@ -1,10 +1,4 @@
 #!/usr/bin/python
-
-'''
-@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-@@@ ON BRANCH GENERATE @@@@@@
-@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-'''
 import networkx as nx
 import sys
 import re
