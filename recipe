@@ -1,16 +1,22 @@
 #!/usr/bin/python
 
-from fuzzywuzzy import process
-from fuzzywuzzy import fuzz
+'''
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@ ON BRANCH GENERATE @@@@@@
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+'''
 import networkx as nx
 import sys
 import re
 
+#Comment out the following if fuzzywuzzy is not needed.
+from fuzzywuzzy import process
+from fuzzywuzzy import fuzz
+
+
 g = nx.MultiDiGraph()
 
-items = open("allItems.list", "r")
-choices = items.read().splitlines()
-
+choices = open("crafted.list", "r").read().splitlines()
 basics = open("basic.list", "r").read().splitlines()
 
 #Items considered basic. Reduces clutter in output.
@@ -26,7 +32,10 @@ for i in recipes:
     for item in comp:
         g.add_edge(str.strip(goal), str.strip(item))
 
-query = str.strip(process.extractOne(sys.argv[1], choices)[0])
+query = str.strip(process.extractOne(sys.argv[1:], choices)[0])
+#Use this instead (and comment out above line) if fuzzywuzzy is not used
+#query = str.strip(sys.argv[1])
+
 print "Inferred Query:", query
 
 prepend  = " |"
