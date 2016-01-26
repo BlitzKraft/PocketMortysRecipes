@@ -6,15 +6,17 @@ import networkx as nx
 import sys
 import re
 
-'''
-TODO: fuzzy match or substring match
-TODO: recursively print recipe tree
-'''
-
 g = nx.MultiDiGraph()
 
 items = open("allItems.list", "r")
-choices = items.readlines()
+choices = items.read().splitlines()
+
+basics = open("basic.list", "r").read().splitlines()
+
+#Items considered basic. Reduces clutter in output.
+#Comment it out to see the difference.
+basics.append("Battery")
+basics.append("SuperchargedBattery")
 
 recipes = open("pure.list", "r")
 
@@ -23,11 +25,29 @@ for i in recipes:
     goal, comp = temp[0], temp[1:]
     for item in comp:
         g.add_edge(str.strip(goal), str.strip(item))
-    
-query = str.strip(process.extractOne(sys.argv[1], choices)[0])
 
-print "Inferred Query:",query
-print "Recipe: "
-for edge in g.edges():
-    if edge[0].lower() == query.lower() :
-        print " -",edge[1]
+query = str.strip(process.extractOne(sys.argv[1], choices)[0])
+print "Inferred Query:", query
+
+prepend  = " |"
+def find_recipe(q):
+    global prepend
+    if q not in basics:
+        sys.stdout.write(prepend)
+        #print "-Recipe for",q
+        sys.stdout.write('--')
+        print q
+        ingred = []
+        for edge in g.edges():
+            if edge[0].lower() == q.lower() :
+                ingred.append(edge[1])
+        if ingred != []:
+            sys.stdout.write(prepend)
+            print "",ingred
+            print prepend
+            prepend = " | " + prepend
+            for i in ingred:
+                find_recipe(i)
+            prepend = prepend[:-5] + " |"
+
+find_recipe(query)
