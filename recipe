@@ -1,10 +1,20 @@
 #!/usr/bin/python
 
+from fuzzywuzzy import process
+from fuzzywuzzy import fuzz
 import networkx as nx
 import sys
 import re
 
+'''
+TODO: fuzzy match or substring match
+TODO: recursively print recipe tree
+'''
+
 g = nx.MultiDiGraph()
+
+items = open("allItems.list", "r")
+choices = items.readlines()
 
 recipes = open("pure.list", "r")
 
@@ -14,13 +24,9 @@ for i in recipes:
     for item in comp:
         g.add_edge(str.strip(goal), str.strip(item))
     
+query = str.strip(process.extractOne(sys.argv[1], choices)[0])
 
-#print g.edges()
-#print g.number_of_edges()
-    
-query = sys.argv[1]
-
-print "Query:",query
+print "Inferred Query:",query
 print "Recipe: "
 for edge in g.edges():
     if edge[0].lower() == query.lower() :
