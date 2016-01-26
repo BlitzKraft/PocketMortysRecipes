@@ -50,7 +50,7 @@ fuzzywuzzy - For fuzzyfind. If you choose not to use it, read the `recipe` and m
 ###Recipes:
 New recipes can be added by simply appending them to `pure.list`. Then run `./generate test` (optional) and `./generate write` to save the results. The first item is the goal and the rest are its constituents.  
 Example line from the file would be:  
-`GwendolynDoll			Robot				LovePotion`
+`GwendolynDoll			Robot				LovePotion`  
 The number of tabs is irrelevant. However, there shouldn't be spaces. The script exclusively tests for tabs and **not** spaces. 
 
 This however does not update the `recipes.list`. This has to be done manually. This file is for human reading and not just parsing. Ergo, it should be hand tuned for readability.
