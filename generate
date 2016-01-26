@@ -1,5 +1,52 @@
 #!/usr/bin/python
 
+'''
+This generates the following files
+
+allItems.list       -- List of all obtainable items
+basic.list          -- List of primary items (can't be crafted)
+crafted.list        -- List of craftable items
+
+pure.list           -- List of recipes for parsing. Strictly formatted. 
+                        Only file that needs to be changed in case of new recipes.
+recipes.list        -- List of recipes, human readable. 
+'''
+
+import sys
 import re
 
+recipes = open("pure.list", "r")
+crafted = []
+basic = []
+iall = []
+for i in recipes:
+    temp = re.split(r'\t+', i)
+    crafted.append(str.strip(temp[0]))
+    for j in temp:
+        if str.strip(j) not in iall:
+            iall.append(str.strip(j))
 
+for k in iall:
+    if str.strip(k) not in crafted:
+        basic.append(k)
+
+def writetofile(name, items):
+    f=open(name, "w")
+    items = sorted(items)
+    for item in items:
+        f.write(item)
+        f.write("\n")
+
+if sys.argv[1].lower() == "write":
+    writetofile("allItems.list", iall)
+    writetofile("basic.list", basic)
+    writetofile("crafted.list", crafted)
+else:
+    print "All items:",len(iall)
+    print iall, "\n"
+
+    print "Crafted:",len(crafted)
+    print crafted, "\n"
+
+    print "Basic:",len(basic)
+    print basic
