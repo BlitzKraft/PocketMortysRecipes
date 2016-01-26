@@ -13,7 +13,7 @@ choices = items.read().splitlines()
 
 basics = open("basic.list", "r").read().splitlines()
 
-#Items considered basic. Reduces clutter in output.
+#Items classified as basic. Reduces clutter in output.
 #Comment it out to see the difference.
 basics.append("Battery")
 basics.append("SuperchargedBattery")
