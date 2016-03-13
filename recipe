@@ -21,10 +21,10 @@ basics.append("SuperchargedBattery")
 recipes = open("pure.list", "r")
 
 for i in recipes:
-    temp = re.split(r'\t+', i)
-    goal, comp = temp[0], temp[1:]
-    for item in comp:
-        g.add_edge(str.strip(goal), str.strip(item))
+	temp = re.split(r'\t+', i)
+	goal, comp = temp[0], temp[1:]
+	for item in comp:
+		g.add_edge(str.strip(goal), str.strip(item))
 
 query = str.strip(process.extractOne(sys.argv[1:], choices)[0])
 #Use this instead (and comment out above line) if fuzzywuzzy is not used
@@ -34,23 +34,23 @@ print "Inferred Query:", query
 
 prepend  = " |"
 def find_recipe(q):
-    global prepend
-    if q not in basics:
-        sys.stdout.write(prepend)
-        #print "-Recipe for",q
-        sys.stdout.write('--')
-        print q
-        ingred = []
-        for edge in g.edges():
-            if edge[0].lower() == q.lower() :
-                ingred.append(edge[1])
-        if ingred != []:
-            sys.stdout.write(prepend)
-            print "",ingred
-            prepend = " | " + prepend
-            print prepend
-            for i in ingred:
-                find_recipe(i)
-            prepend = prepend[:-5] + " |"
+	global prepend
+	if q not in basics:
+		sys.stdout.write(prepend)
+		#print "-Recipe for",q
+		sys.stdout.write('--')
+		print q
+		ingred = []
+		for edge in g.edges():
+			if edge[0].lower() == q.lower() :
+				ingred.append(edge[1])
+		if ingred != []:
+			sys.stdout.write(prepend)
+			print "",ingred
+			prepend = " | " + prepend
+			print prepend
+			for i in ingred:
+				find_recipe(i)
+			prepend = prepend[:-5] + " |"
 
 find_recipe(query)
