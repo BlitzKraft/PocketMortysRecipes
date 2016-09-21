@@ -4,8 +4,13 @@ import sys
 import re
 
 #Comment out the following if fuzzywuzzy is not needed.
-from fuzzywuzzy import process
-from fuzzywuzzy import fuzz
+try:
+    from fuzzywuzzy import process
+    from fuzzywuzzy import fuzz
+    fuzzy_search = True
+except ImportError:
+    print("fuzzywuzzy import failed. Using Exact search")
+    fuzzy_search = False
 
 
 g = nx.MultiDiGraph()
@@ -26,31 +31,35 @@ for i in recipes:
 	for item in comp:
 		g.add_edge(str.strip(goal), str.strip(item))
 
-query = str.strip(process.extractOne(sys.argv[1:], choices)[0])
 #Use this instead (and comment out above line) if fuzzywuzzy is not used
-#query = str.strip(sys.argv[1])
-
-print "Inferred Query:", query
+if not fuzzy_search:
+    query = str.strip(sys.argv[1])
+else:
+    query = str.strip(process.extractOne(sys.argv[1:], choices)[0])
+    print "Inferred Query:", query
 
 prepend  = " |"
 def find_recipe(q):
-	global prepend
-	if q not in basics:
-		sys.stdout.write(prepend)
-		#print "-Recipe for",q
-		sys.stdout.write('--')
-		print q
-		ingred = []
-		for edge in g.edges():
-			if edge[0].lower() == q.lower() :
-				ingred.append(edge[1])
-		if ingred != []:
-			sys.stdout.write(prepend)
-			print "",ingred
-			prepend = " | " + prepend
-			print prepend
-			for i in ingred:
-				find_recipe(i)
-			prepend = prepend[:-5] + " |"
+    if((q not in basics) and (q not in choices)):
+        print("{} not found in list.".format(q))
+    else:
+        global prepend
+        if q not in basics:
+            sys.stdout.write(prepend)
+            #print "-Recipe for",q
+            sys.stdout.write('--')
+            print q
+            ingred = []
+            for edge in g.edges():
+                if edge[0].lower() == q.lower() :
+                    ingred.append(edge[1])
+            if ingred != []:
+                sys.stdout.write(prepend)
+                print "",ingred
+                prepend = " | " + prepend
+                print prepend
+                for i in ingred:
+                    find_recipe(i)
+                prepend = prepend[:-5] + " |"
 
 find_recipe(query)
